@@ -38,7 +38,10 @@ else:
 for m in meds_list:
         for time in m["times"]:
             if time in timeOptions:
-                print("send message" + m["_id"]) # TODO: print USER id too (need to restructure db to store this)
+                u = m["user"]
+                num = Users.find_one({"number": m["user"]})
+                print("send message to: " + num["number"]) 
                 # call send_message.py
-            if not (m["chronic"]):
-                print("not chronic" + m["_id"]) # TODO: decremend remDoses here
+                if not (m["chronic"]):  
+                    Meds.update_one({"_id": m["_id"]}, {"$inc": {"remDoses": -1}})
+              
