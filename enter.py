@@ -12,7 +12,7 @@ def enter(entry):
     num = entry["number"]
 
     u = Users.find_one({"number": num})
-    print("u: " + str(u))
+    
     if(u == None): # user is not already in the system, adding them
         medHashes = []
         newUser = {"number": num, "meds": []}
@@ -34,11 +34,14 @@ def enter(entry):
         for m in entry["meds"]:
             med = Meds.find_one({"user": uid, "name": m["name"]})
             if med == None:
-                {"name": m["name"], "user": uid, "times": m["times"], 
+                med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],
                 "message": m["message"]}
                 Meds.insert_one(med)
+            else:
+                Meds.update_one({"_id": med["_id"]}, {"$set": {"times": m["times"]}})
+
         
         userMeds = Meds.find({"user": uid})
         medHashes = []
@@ -48,8 +51,6 @@ def enter(entry):
 
 if __name__ == "__main__":
     
-  
-
     medsDict1 = {"name": "testMed", "times": ["04:13", "12:34"], 
     "chronic": False, "withFood": False, "doses": 14, "restrictions": "no calcium", 
     "message": "hi"}
