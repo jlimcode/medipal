@@ -36,10 +36,11 @@ def enter(entry):
         uid = u["_id"]
         
         for m in entry["meds"]: 
+            mes = create_message(med)
             med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],
-                "message": m["message"]}
+                "message": mes, "anonymous": m["anonymous"]}
             Meds.insert_one(med)
 
         userMeds = Meds.find({"user": uid})
@@ -55,12 +56,11 @@ def enter(entry):
                 med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],
-                "message": m["message"]}
+                "message": m["message"], "anonymous": m["anonymous"]}
                 Meds.insert_one(med)
             else:
                 Meds.update_one({"_id": med["_id"]}, {"$set": {"times": m["times"]}})
 
-        
         userMeds = Meds.find({"user": uid})
         medHashes = []
         for m in userMeds:

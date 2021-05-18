@@ -2,6 +2,14 @@ import os
 import time
 from pymongo import MongoClient
 
+def remove(med, user):
+    mid = m["_id"]
+    newMeds = (u["meds"]).remove(mid)
+
+    Users.update_one({"_id": u["_id"]}, {"$set": {"meds": newMeds}})
+    Meds.delete_one({"_id": m["_id"]})
+              
+
 TIME_INTERVAL = 10 
 
 mongo_key = os.getenv('MONGO_LOGIN')
@@ -41,7 +49,11 @@ for m in meds_list:
                 u = m["user"]
                 num = Users.find_one({"number": m["user"]})
                 print("send message to: " + num["number"]) 
-                # call send_message.py
+                # call send_message.py w/ num & m["message"]
                 if not (m["chronic"]):  
                     Meds.update_one({"_id": m["_id"]}, {"$inc": {"remDoses": -1}})
-              
+                    if m["remDoses"] == 0:
+                        remove(m, u)
+
+
+
