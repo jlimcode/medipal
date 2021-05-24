@@ -15,7 +15,7 @@ TIME_INTERVAL = 10
 
 mongo_key = os.getenv('MONGO_LOGIN')
 
-cluster = MongoClient(mongo_key)
+cluster = MongoClient(mongo_key, tlsAllowInvalidCertificates=True)
 db = cluster["Medipal"]
 Users = db["Users"] 
 Meds = db["Meds"] 

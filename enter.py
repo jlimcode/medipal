@@ -19,7 +19,7 @@ def create_message(med):
     return message
 
 def enter(entry):
-    cluster = MongoClient(mongo_key)
+    cluster = MongoClient(mongo_key, tlsAllowInvalidCertificates=True)
     db = cluster["Medipal"]
     Users = db["Users"] 
     Meds = db["Meds"] 
