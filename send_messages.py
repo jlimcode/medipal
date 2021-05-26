@@ -1,6 +1,7 @@
 import os
 import time
 from pymongo import MongoClient
+from send_text import send_text
 
 def remove(med, user):
     mid = m["_id"]
@@ -49,7 +50,7 @@ for m in meds_list:
                 u = m["user"]
                 num = Users.find_one({"number": m["user"]})
                 print("send message to: " + num["number"]) 
-                # call send_message.py w/ num & m["message"]
+                #send_text(m["number"], m["message"])
                 if not (m["chronic"]):  
                     Meds.update_one({"_id": m["_id"]}, {"$inc": {"remDoses": -1}})
                     if m["remDoses"] == 0:

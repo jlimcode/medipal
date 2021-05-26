@@ -1,6 +1,6 @@
 import os
 from pymongo import MongoClient
-
+from send_text import send_text
 mongo_key = os.getenv('MONGO_LOGIN')
 
 def create_message(med):
@@ -34,7 +34,7 @@ def enter(entry):
         Users.insert_one(newUser)
         u = Users.find_one({"number": num})
         uid = u["_id"]
-        
+        send_text(u["number"], "Hello! This is MediPal, your Personal Health Assistant.  I am here to help you get over this little bump in life, so you can get back to doing the things you love with the people you love! Great meeting you, and I will be in touch soon!")
         for m in entry["meds"]: 
             mes = create_message(med)
             med = {"name": m["name"], "user": uid, "times": m["times"], 
