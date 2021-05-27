@@ -1,3 +1,5 @@
+from enter import enter
+from Medication import Entry, Medication
 from twilio.rest import Client
 import os
 import csv
@@ -28,7 +30,7 @@ def send_text():
         print(number)
         message = client.messages.create(
             body="Hello world!",
-            from_= twilio_number,
+            from_=twilio_number,
             to='+' + number
         )
         print(message.sid)
@@ -36,10 +38,28 @@ def send_text():
 
 
 ALLOWED_EXTENSIONS = {'csv'}
+REQUIRED_FIELDS = {
+    'name', 'times', 'chronic', 'withFood', 'doses', 'restrictions', 'anonymous', 'number'
+}
+PARSE_AS_TRUE = {'TRUE', 'True', 'true', 'T'}
+PARSE_AS_FALSE = {'FALSE', 'False', 'false', 'F'}
+
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def parse_bool(strBool: str) -> bool:
+    if strBool is bool:
+        return strBool
+    if strBool in PARSE_AS_TRUE:
+        return True
+    elif strBool in PARSE_AS_FALSE:
+        return False
+    else:
+        return None
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -61,6 +81,20 @@ def upload_file():
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
                 print(line_count)
+                print(row)
+                if(not REQUIRED_FIELDS <= row.keys()):  # invalid
+                    print("Invalid row! Missing: ")
+                    print(REQUIRED_FIELDS - row.keys())
+                else:
+                    for key in ['withFood', 'chronic', 'anonymous']:
+                        row[key] = parse_bool(row[key])
+                    row['doses'] = int(row['doses'])
+                    row['times'] = row['times'].split(", ")
+                    print(row['times'])
+                    print(row)
+                    # will almost certainly need to manage times input somehow
+                    m = Medication(**row)
+                    enter(Entry(row['number'], [m]))
         return 'Success!'
     return '''
     <!doctype html>
