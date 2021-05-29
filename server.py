@@ -6,6 +6,10 @@ import csv
 from flask import Flask, request, redirect, flash
 app = Flask(__name__)
 
+flask_secret = os.getenv('FLASK_SECRET', default='hashbrowns')
+
+app.config['SECRET_KEY']='alskdjf;alkjsd;flakjs;dlfkj;aj;aoieij'
+
 # Download the helper library from https://www.twilio.com/docs/python/install
 
 # Your Account Sid and Auth Token from twilio.com/console

@@ -19,7 +19,7 @@ class Medication:
         self.message = mes
 
     def getDBFormat(self) -> dict:
-        myDict = vars(self)
+        myDict = vars(self).copy()
         myDict["food"] = myDict.pop("withFood")
         myDict["remDoses"] = myDict.pop("doses")
         return myDict
