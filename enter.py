@@ -15,7 +15,7 @@ def create_message(med):
         message += " without food!\n"
     if med["restrictions"] != "" and med["restrictions"] != None:
         message += "Keep in mind these restrictions: " + med["restrictions"]
-    message += '\n' + med["restrictions"]
+    message += '!\n' + med["message"]
     return message
 
 def enter(entry):
@@ -34,9 +34,9 @@ def enter(entry):
         Users.insert_one(newUser)
         u = Users.find_one({"number": num})
         uid = u["_id"]
-        send_text(u["number"], "Hello! This is MediPal, your Personal Health Assistant.  I am here to help you get over this little bump in life, so you can get back to doing the things you love with the people you love! Great meeting you, and I will be in touch soon!")
+        send_text(u["number"], "Hello! This is MediPal, your Personal Health Assistant.  I am here to help you get over this little bump in life, so you can get back to doing the things you love with the people you love! If you ever want to opt out of my help reply ‘STOP’. Great meeting you, and I will be in touch soon!")
         for m in entry["meds"]: 
-            mes = create_message(med)
+            mes = create_message(m)
             med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],
@@ -53,6 +53,7 @@ def enter(entry):
         for m in entry["meds"]:
             med = Meds.find_one({"user": uid, "name": m["name"]})
             if med == None:
+                mes = create_message(m)
                 med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],

@@ -48,7 +48,7 @@ for m in meds_list:
         for time in m["times"]:
             if time in timeOptions:
                 u = m["user"]
-                num = Users.find_one({"number": m["user"]})
+                num = Users.find_one({"_id": m["uid"]})
                 print("send message to: " + num["number"]) 
                 #send_text(m["number"], m["message"])
                 if not (m["chronic"]):  
