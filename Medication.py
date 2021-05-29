@@ -24,6 +24,13 @@ class Medication:
         myDict["remDoses"] = myDict.pop("doses")
         return myDict
 
+    def __repr__(self) -> str:
+        return (
+            f'Medication: {self.name}, {("chronic" if self.chronic else "")} \n'
+            f'Taken at  {", ".join(self.times)} '
+            f'with {self.doses} dose(s) remaining'
+        )
+
 
 MedicationList = list[Medication]
 

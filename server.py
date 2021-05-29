@@ -1,3 +1,4 @@
+from termcolor import cprint
 from enter import enter
 from Medication import Entry, Medication
 from twilio.rest import Client
@@ -27,13 +28,13 @@ def hello_world():
 
 @app.route('/ping', methods=['GET', 'POST'])
 def send_text():
-    number = request.args.get("phone")
+    number = request.args.get('phone')
     if number is None:
-        print("Invalid number")
+        print('Invalid number')
     else:
         print(number)
         message = client.messages.create(
-            body="Hello world!",
+            body='Hello world!',
             from_=twilio_number,
             to='+' + number
         )
@@ -79,26 +80,26 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            csv_text = "".join(list(file.read().decode('utf-8')))
+            csv_text = ''.join(list(file.read().decode('utf-8')))
             csv_reader = csv.DictReader(csv_text.splitlines(), delimiter=',')
             for line_count, row in enumerate(csv_reader):
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                print(line_count)
-                print(row)
+                cprint(f'Line: {line_count + 1}', 'blue')
                 if(not REQUIRED_FIELDS <= row.keys()):  # invalid
-                    print("Invalid row! Missing: ")
+                    cprint('Invalid row! Missing: ', 'red')
                     print(REQUIRED_FIELDS - row.keys())
                 else:
                     for key in ['withFood', 'chronic', 'anonymous']:
                         row[key] = parse_bool(row[key])
                     row['doses'] = int(row['doses'])
-                    row['times'] = row['times'].split(", ")
-                    print(row['times'])
-                    print(row)
+                    row['times'] = row['times'].split(', ')
                     # will almost certainly need to manage times input somehow
                     m = Medication(**row)
+                    cprint('Successfully imported medication: ', 'green')
+                    print(m)
                     enter(Entry(row['number'], [m]))
+        cprint('All medications posted!', 'green')
         return 'Success!'
     return '''
     <!doctype html>

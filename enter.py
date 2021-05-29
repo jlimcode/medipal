@@ -2,6 +2,7 @@ from Medication import Entry, Medication
 from send_text import send_text
 import os
 from pymongo import MongoClient
+from termcolor import cprint
 
 mongo_key = os.getenv('MONGO_LOGIN')
 
@@ -33,6 +34,7 @@ def enter(entry: Entry) -> None:
     u = Users.find_one({"number": num})
 
     if(u == None):  # user is not already in the system, adding them
+        cprint(f'Creating user corresponding to f{num}', 'yellow')
         medHashes = []
         newUser = {"number": num, "meds": []}
         Users.insert_one(newUser)
@@ -43,6 +45,8 @@ def enter(entry: Entry) -> None:
             m.addMessage(create_message(m))
             m.addUID(uid)
             Meds.insert_one(m.getDBFormat())
+            cprint(f'Medication entered to database:', 'green')
+            print(m)
 
         userMeds = Meds.find({"user": uid})
         for m in userMeds:
@@ -51,14 +55,19 @@ def enter(entry: Entry) -> None:
 
     else:  # updating existing user
         uid = u["_id"]
+        cprint(f'Updating user with id: f{uid}', 'yellow')
         for m in entry.meds:
             med = Meds.find_one({"user": uid, "name": m.name})
             if med == None:
                 med = m.getDBFormat()
                 Meds.insert_one(med)
+                cprint(f'Medication added to database:', 'green')
+                print(m)
             else:
                 Meds.update_one({"_id": med["_id"]}, {
                                 "$set": {"times": m.times}})
+                cprint(f'Medication updated on database:', 'yellow')
+                print(m)
 
         userMeds = Meds.find({"user": uid})
         medHashes = []
