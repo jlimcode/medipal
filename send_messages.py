@@ -29,9 +29,13 @@ timeOptions = []
 
 # calcuating and formating range of minutes in TIME_INTERVAL from current time in a list
 if (mins < (60 - TIME_INTERVAL)):
-    for x in range(mins, mins+ TIME_INTERVAL + 1): 
-        t = str(hour) + ":" + str(x)
-        timeOptions += [t]
+    for x in range(mins, mins+ TIME_INTERVAL + 1):
+        if(x < 10): 
+            t = str(hour) + ":0" + str(x)
+            timeOptions += [t]
+        else:
+            t = str(hour) + ":" + str(x)
+            timeOptions += [t]
 else:
     over = mins - 60 + TIME_INTERVAL
     for x in range(mins, 60):
@@ -41,11 +45,12 @@ else:
     if hour == 23:
         next_h = 0
     for x in range(0, over+1):
-        t = str(next_h) + ":" + str(x)
+        t = str(next_h) + ":0" + str(x)
         timeOptions += [t]
 
 for m in meds_list:
         for time in m["times"]:
+            print(time +  " " + str(timeOptions))
             if time in timeOptions:
                 u = m["user"]
                 num = Users.find_one({"_id": m["user"]})

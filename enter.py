@@ -57,7 +57,7 @@ def enter(entry):
                 med = {"name": m["name"], "user": uid, "times": m["times"], 
                 "chronic": m["chronic"], "food": m["withFood"], 
                 "remDoses": m["doses"], "restrictions": m["restrictions"],
-                "message": m["message"], "anonymous": m["anonymous"]}
+                "message": mes, "anonymous": m["anonymous"]}
                 Meds.insert_one(med)
             else:
                 Meds.update_one({"_id": med["_id"]}, {"$set": {"times": m["times"]}})
@@ -73,8 +73,8 @@ if __name__ == "__main__":
     medsDict1 = {"name": "testMed", "times": ["04:13", "12:34"], 
     "chronic": False, "withFood": False, "doses": 14, "restrictions": "no calcium", 
     "message": "hi", "anonymous": True}
-    medsDict2 = {"name": "testMed4", "times": ["04:14", "17:46"], "chronic": True, 
-    "withFood": True, "doses": -1, "restrictions": "", 
+    medsDict2 = {"name": "testMed7", "times": ["04:14", "2:38"], "chronic": True, 
+    "withFood": True, "doses": -1, "restrictions": "calcium", 
     "message": "hello", "anonymous": False}
     meds = [medsDict1] + [medsDict2]
     testDict = {"number": "18054051091", "meds": meds}
