@@ -14,8 +14,8 @@ def create_message(med):
     else:
         message += " without food!\n"
     if med["restrictions"] != "" and med["restrictions"] != None:
-        message += "Keep in mind these restrictions: " + med["restrictions"]
-    message += '!\n' + med["message"]
+        message += "Keep in mind these restrictions: " + med["restrictions"] + "!\n"
+    message +=  med["message"]
     return message
 
 def enter(entry):
@@ -73,11 +73,11 @@ if __name__ == "__main__":
     medsDict1 = {"name": "testMed", "times": ["04:13", "12:34"], 
     "chronic": False, "withFood": False, "doses": 14, "restrictions": "no calcium", 
     "message": "hi", "anonymous": True}
-    medsDict2 = {"name": "testMed2", "times": ["04:14", "12:14"], "chronic": True, 
-    "withFood": True, "doses": -1, "restrictions": "need calcium", 
+    medsDict2 = {"name": "testMed4", "times": ["04:14", "17:46"], "chronic": True, 
+    "withFood": True, "doses": -1, "restrictions": "", 
     "message": "hello", "anonymous": False}
     meds = [medsDict1] + [medsDict2]
-    testDict = {"number": "+1234567890", "meds": meds}
+    testDict = {"number": "18054051091", "meds": meds}
     enter(testDict)
     print("done")
  

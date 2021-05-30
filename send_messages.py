@@ -48,13 +48,14 @@ for m in meds_list:
         for time in m["times"]:
             if time in timeOptions:
                 u = m["user"]
-                num = Users.find_one({"_id": m["uid"]})
+                num = Users.find_one({"_id": m["user"]})
                 print("send message to: " + num["number"]) 
-                #send_text(m["number"], m["message"])
+                send_text(num["number"], m["message"])
                 if not (m["chronic"]):  
                     Meds.update_one({"_id": m["_id"]}, {"$inc": {"remDoses": -1}})
                     if m["remDoses"] == 0:
                         remove(m, u)
+
 
 
 
