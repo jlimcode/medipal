@@ -3,22 +3,23 @@ import time
 from pymongo import MongoClient
 from send_text import send_text
 
+
 def remove(med, user):
     mid = m["_id"]
     newMeds = (u["meds"]).remove(mid)
 
     Users.update_one({"_id": u["_id"]}, {"$set": {"meds": newMeds}})
     Meds.delete_one({"_id": m["_id"]})
-              
 
-TIME_INTERVAL = 10 
+
+TIME_INTERVAL = 10
 
 mongo_key = os.getenv('MONGO_LOGIN')
 
-cluster = MongoClient(mongo_key)
+cluster = MongoClient(mongo_key, tlsAllowInvalidCertificates=True)
 db = cluster["Medipal"]
-Users = db["Users"] 
-Meds = db["Meds"] 
+Users = db["Users"]
+Meds = db["Meds"]
 
 meds_list = Meds.find({})
 

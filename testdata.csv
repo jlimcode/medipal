@@ -1,0 +1,22 @@
+number,name,times,chronic,withFood,doses,restrictions,anonymous,message
+18054051091,Ibuprophen,"12:00, 18:00",FALSE,TRUE,1,No calcium,FALSE,This is so you can walk your daughter down the aisle!
+19732864256,Amoxicillin,"10:00, 17:00",FALSE,FALSE,2,FALSE,FALSE,FALSE
+19543289012,Reclipsen,13:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
+15083445220,Cephalexin,"6:00, 12:00, 18:00",FALSE,FALSE,1,FALSE,FALSE,FALSE
+19895723441,Albuterol,9:00,TRUE,FALSE,2,FALSE,FALSE,FALSE
+12340093415,Clindamycin,10:00,FALSE,FALSE,1,FALSE,FALSE,This is so you heal safely!
+18568351330,Alprazolam (Xanax),12:00,TRUE,FALSE,1,FALSE,TRUE,FALSE
+17724507622,Ergocalciferol (Vitamin D),17:00,TRUE,FALSE,1,FALSE,FALSE,FALSE
+19895067223,Acetaminophen,"8:00, 15:00",FALSE,TRUE,1,No alcohol,FALSE,FALSE
+17158820705,Oxycodone,18:00,FALSE,TRUE,1,FALSE,FALSE,FALSE
+12602304487,Azithromycin,1:00,FALSE,FALSE,2,FALSE,FALSE,FALSE
+12012593643,Vicodin,15:00,FALSE,TRUE,1,No alcohol,TRUE,FALSE
+12025537874,Losartan,14:00,TRUE,TRUE,1,No alcohol,FALSE,This is so you are able to enjoy exercising every day!
+17792473502,Potassium,"10:00, 19:00",TRUE,FALSE,1,FALSE,FALSE,FALSE
+18725409951,Cetirizine,15:00,FALSE,TRUE,1,FALSE,FALSE,This is so you can enjoy spending time outside with your kids!
+15346625090,Adderall,"8:00, 14:00",TRUE,FALSE,2,"No MAO inhibitors, No alcohol",,FALSE
+13502389550,Doxycycline,"11:00, 18:00",FALSE,TRUE,1,FALSE,FALSE,FALSE
+12239582037,Levora,16:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
+12398540033,Ocella,11:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
+15448022149,Clozapine,9:00,TRUE,FALSE,1,FALSE,TRUE,FALSE
+[NUMBER],Ibuprophen,[TIME],FALSE,TRUE,1,No calcium,FALSE,This is so you can walk your daughter down the aisle!

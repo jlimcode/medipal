@@ -1,3 +1,4 @@
+import sys
 import os
 from twilio.rest import Client
 account_sid = os.getenv('TWILIO_ACCOUNT_SID')
@@ -21,3 +22,7 @@ def send_text(number, message):
         print(message.sid)
     return 0
 
+
+if __name__ == "__main__":
+    arg_list = sys.argv
+    send_text(number=arg_list[1], message=arg_list[2])
