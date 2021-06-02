@@ -3,7 +3,7 @@ TimeList = list[str]
 
 # might want to make restrictions a list of str?
 class Medication:
-    def __init__(self, name: str, times: TimeList, chronic: bool, withFood: bool, doses: int, restrictions: str, anonymous: bool, *unused, **unusedkw) -> None:
+    def __init__(self, name: str, times: TimeList, chronic: bool, withFood: bool, doses: int, restrictions: str, anonymous: bool, message: str='', *unused, **unusedkw) -> None:
         self.name = name
         self.times = times
         self.chronic = chronic
@@ -11,9 +11,11 @@ class Medication:
         self.doses = doses
         self.restrictions = restrictions
         self.anonymous = anonymous
+        self.message = message
 
     def addUID(self, uid: str) -> None:
         self.uid = uid
+        self.user = uid
 
     def addMessage(self, mes: str) -> None:
         self.message = mes
