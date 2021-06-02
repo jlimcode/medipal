@@ -59,6 +59,8 @@ def enter(entry: Entry) -> None:
         for m in entry.meds:
             med = Meds.find_one({"user": uid, "name": m.name})
             if med == None:
+                m.addMessage(create_message(m))
+                m.addUID(uid)
                 med = m.getDBFormat()
                 Meds.insert_one(med)
                 cprint(f'Medication added to database:', 'green')
