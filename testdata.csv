@@ -1,5 +1,5 @@
 number,name,times,chronic,withFood,doses,restrictions,anonymous,message
-18054051091,Ibuprophen,"12:00, 18:00",FALSE,TRUE,1,No calcium,FALSE,This is so you can walk your daughter down the isle!
+18054051091,Ibuprophen,"12:00, 18:00",FALSE,TRUE,1,No calcium,FALSE,This is so you can walk your daughter down the aisle!
 19732864256,Amoxicillin,"10:00, 17:00",FALSE,FALSE,2,FALSE,FALSE,FALSE
 19543289012,Reclipsen,13:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
 15083445220,Cephalexin,"6:00, 12:00, 18:00",FALSE,FALSE,1,FALSE,FALSE,FALSE
@@ -19,3 +19,4 @@ number,name,times,chronic,withFood,doses,restrictions,anonymous,message
 12239582037,Levora,16:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
 12398540033,Ocella,11:00,TRUE,FALSE,1,No rifampin,TRUE,FALSE
 15448022149,Clozapine,9:00,TRUE,FALSE,1,FALSE,TRUE,FALSE
+[NUMBER],Ibuprophen,[TIME],FALSE,TRUE,1,No calcium,FALSE,This is so you can walk your daughter down the aisle!
